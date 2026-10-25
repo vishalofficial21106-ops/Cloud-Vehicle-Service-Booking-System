@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | Cloud Vehicle Service Booking System</title>
+  <!-- Google Fonts & Font Awesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-cloud"></i>
+        </div>
+        <span>Cloud<span class="highlight">Service</span></span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu"></ul>
+      <div class="nav-actions" id="nav-actions"></div>
+    </div>
+  </nav>
+
+  <!-- Register Form Container -->
+  <main class="container-narrow">
+    <div class="card" style="margin-top: 1.5rem;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="width: 58px; height: 58px; border-radius: 50%; background: var(--primary-gradient); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 1rem; box-shadow: 0 4px 15px rgba(37,99,235,0.4);">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <h1 style="font-size: 1.85rem;">Create Your Account</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.35rem;">
+          Register to schedule vehicle maintenance, save vehicles, and track service history
+        </p>
+      </div>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name *</label>
+          <div style="position: relative;">
+            <input type="text" id="name" class="form-control" placeholder="e.g. John Doe" required style="padding-left: 2.6rem;">
+            <i class="fa-solid fa-user" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <div style="position: relative;">
+              <input type="email" id="email" class="form-control" placeholder="john@example.com" required style="padding-left: 2.6rem;">
+              <i class="fa-solid fa-envelope" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number *</label>
+            <div style="position: relative;">
+              <input type="tel" id="phone" class="form-control" placeholder="+91 9876543210" required style="padding-left: 2.6rem;">
+              <i class="fa-solid fa-phone" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="password">Password (min 6 chars) *</label>
+            <div style="position: relative;">
+              <input type="password" id="password" class="form-control" placeholder="••••••••" required minlength="6" style="padding-left: 2.6rem;">
+              <i class="fa-solid fa-key" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirmPassword">Confirm Password *</label>
+            <div style="position: relative;">
+              <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required minlength="6" style="padding-left: 2.6rem;">
+              <i class="fa-solid fa-shield-check" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="address">Residential Address (Optional)</label>
+          <input type="text" id="address" class="form-control" placeholder="e.g. 104 Sunrise Apts, MG Road">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="role">Register Account As</label>
+          <select id="role" class="form-control">
+            <option value="customer" selected>Customer (Standard Service Client)</option>
+            <option value="admin">Administrator (Workshop Supervisor Demo)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="register-submit-btn">
+          <i class="fa-solid fa-user-check"></i> Complete Registration
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.75rem; font-size: 0.9rem; color: var(--text-muted);">
+        Already registered? 
+        <a href="login.html" style="font-weight: 600; margin-left: 0.25rem;">Sign In</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div>&copy; 2026 Cloud Vehicle Service Booking System</div>
+      <div><a href="index.html">Back to Home</a></div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Redirect if already logged in
+    if (Auth.isLoggedIn()) {
+      const user = Auth.getUser();
+      window.location.href = user.role === 'admin' ? 'admin-dashboard.html' : 'customer-dashboard.html';
+    }
+
+    const registerForm = document.getElementById('register-form');
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('register-submit-btn');
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const address = document.getElementById('address').value.trim();
+      const role = document.getElementById('role').value;
+
+      if (password !== confirmPassword) {
+        showToast('Passwords do not match. Please re-enter.', 'error');
+        return;
+      }
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Registering...';
+
+        const res = await API.post('/auth/register', {
+          name,
+          email,
+          phone,
+          password,
+          address,
+          role
+        });
+
+        // Save session
+        Auth.setAuth(res.token, res.user);
+        showToast('Registration successful! Welcome aboard.', 'success');
+
+        setTimeout(() => {
+          if (res.user.role === 'admin') {
+            window.location.href = 'admin-dashboard.html';
+          } else {
+            window.location.href = 'customer-dashboard.html';
+          }
+        }, 800);
+
+      } catch (err) {
+        showToast(err.message || 'Registration failed', 'error');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-user-check"></i> Complete Registration';
+      }
+    });
+  </script>
+</body>
+</html>

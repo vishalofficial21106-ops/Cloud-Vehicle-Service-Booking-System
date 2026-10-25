@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Vehicle Service Booking System | Smart Auto Care</title>
+  <!-- Google Fonts & Font Awesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-cloud"></i>
+        </div>
+        <span>Cloud<span class="highlight">Service</span></span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <!-- Rendered dynamically by auth.js -->
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Rendered dynamically by auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-pill">
+      <i class="fa-solid fa-bolt"></i> Next-Gen Automotive Cloud Platform
+    </div>
+    <h1>Effortless Vehicle Maintenance <br><span class="highlight">Booked in Seconds</span></h1>
+    <p>
+      Seamlessly book periodic car and bike services, track real-time workshop status, and manage your vehicle health with transparent pricing.
+    </p>
+
+    <div class="hero-cta">
+      <a href="book-service.html" class="btn btn-primary btn-lg" id="hero-book-btn">
+        <i class="fa-solid fa-calendar-check"></i> Book an Appointment
+      </a>
+      <a href="#services" class="btn btn-secondary btn-lg">
+        <i class="fa-solid fa-wrench"></i> View Service Packages
+      </a>
+    </div>
+  </header>
+
+  <!-- Feature Highlights -->
+  <section class="container" style="padding-top: 0;">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <div>
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Instant Cloud Booking</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <i class="fa-solid fa-certificate"></i>
+        </div>
+        <div>
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Certified Mechanics</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon amber">
+          <i class="fa-solid fa-tags"></i>
+        </div>
+        <div>
+          <div class="stat-value">Fixed</div>
+          <div class="stat-label">Transparent Rates</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <div class="stat-value">OEM</div>
+          <div class="stat-label">Genuine Spares Guarantee</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Services Catalog Section -->
+  <section class="container" id="services">
+    <div style="text-align: center; max-width: 650px; margin: 0 auto 2.5rem;">
+      <h2 style="font-size: 2.2rem; margin-bottom: 0.75rem;">Explore Service Packages</h2>
+      <p style="color: var(--text-muted);">
+        Comprehensive maintenance solutions tailored for Cars, SUVs, and Bikes. Book online and get instant workshop confirmation.
+      </p>
+
+      <!-- Category Filter Buttons -->
+      <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;" id="service-filters">
+        <button class="btn btn-primary btn-sm filter-btn active" data-category="All">All Services</button>
+        <button class="btn btn-secondary btn-sm filter-btn" data-category="Periodic Maintenance">Periodic Maintenance</button>
+        <button class="btn btn-secondary btn-sm filter-btn" data-category="Brakes & Suspension">Brakes & Suspension</button>
+        <button class="btn btn-secondary btn-sm filter-btn" data-category="Engine & Transmission">Engine Tuning</button>
+        <button class="btn btn-secondary btn-sm filter-btn" data-category="AC & Electrical">AC & Cabin</button>
+        <button class="btn btn-secondary btn-sm filter-btn" data-category="Detailing & Wash">Wash & Spa</button>
+      </div>
+    </div>
+
+    <!-- Services Dynamic Grid Container -->
+    <div class="service-grid" id="services-container">
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">
+        <i class="fa-solid fa-circle-notch fa-spin fa-2x" style="color: var(--primary); margin-bottom: 1rem;"></i>
+        <p>Loading available service catalog from database...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="container" id="how-it-works" style="background: rgba(15, 23, 42, 0.4); border-radius: var(--radius-lg); margin-top: 3rem; border: 1px solid var(--border-color);">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">How It Works</h2>
+      <p style="color: var(--text-muted);">Simple four-step booking workflow designed for maximum convenience.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;">
+      <div class="card" style="text-align: center;">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary-gradient); color: #fff; font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">1</div>
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Add Your Vehicle</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Register your car, bike, or SUV with registration number and model.</p>
+      </div>
+
+      <div class="card" style="text-align: center;">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary-gradient); color: #fff; font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">2</div>
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Select Service</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Choose from standard periodic maintenance, diagnostics, or detailing.</p>
+      </div>
+
+      <div class="card" style="text-align: center;">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary-gradient); color: #fff; font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">3</div>
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Choose Slot</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Select your preferred appointment date and time slot that fits your schedule.</p>
+      </div>
+
+      <div class="card" style="text-align: center;">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary-gradient); color: #fff; font-weight: 800; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">4</div>
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Live Status</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Monitor workshop stages from Pending, In Progress, to Completed in real-time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-cloud text-blue"></i> Cloud Vehicle Service
+        </div>
+        <p style="color: var(--text-dim); max-width: 400px;">
+          A full-stack cloud vehicle service scheduling and management application built with Node.js, Express, MongoDB, and modern JavaScript.
+        </p>
+      </div>
+      <div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="book-service.html">Book Service</a></li>
+          <li><a href="login.html">Sign In</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+        <p style="margin-top: 1rem; color: var(--text-dim); font-size: 0.8rem;">
+          &copy; 2026 Cloud Vehicle Service Booking System. College Project Demonstration.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Load and render service catalog
+    let allServices = [];
+
+    async function loadCatalog(category = 'All') {
+      const container = document.getElementById('services-container');
+      try {
+        const url = category === 'All' ? '/services' : `/services?category=${encodeURIComponent(category)}`;
+        const res = await API.get(url);
+        allServices = res.services || [];
+
+        if (allServices.length === 0) {
+          container.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+              <p style="color: var(--text-muted);">No services found in this category.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = allServices.map(service => `
+          <div class="service-card">
+            ${service.isPopular ? '<span class="service-badge-popular"><i class="fa-solid fa-star"></i> Popular</span>' : ''}
+            <div class="service-icon-wrap">
+              <i class="fa-solid ${service.icon || 'fa-wrench'}"></i>
+            </div>
+            <h3>${service.name}</h3>
+            <p class="desc">${service.description}</p>
+            
+            <div class="service-meta">
+              <div>
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">EST. TIME</span>
+                <span style="font-weight: 600;"><i class="fa-regular fa-clock"></i> ${service.estimatedTime}</span>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">STARTING AT</span>
+                <span class="service-price">${formatCurrency(service.basePrice)}</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+              ${service.applicableVehicles.map(v => `<span style="font-size: 0.72rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 4px; color: var(--text-muted);">${v}</span>`).join('')}
+            </div>
+
+            <a href="book-service.html?serviceId=${service._id}" class="btn btn-primary" style="width: 100%;">
+              <i class="fa-solid fa-calendar-plus"></i> Book Service
+            </a>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #f87171;">
+            <p>Unable to load service catalog: ${err.message}</p>
+            <button onclick="loadCatalog()" class="btn btn-secondary btn-sm" style="margin-top: 1rem;">Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    // Category filter click handler
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('btn-primary', 'active');
+          b.classList.add('btn-secondary');
+        });
+        btn.classList.add('btn-primary', 'active');
+        btn.classList.remove('btn-secondary');
+        loadCatalog(btn.dataset.category);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCatalog();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Operations Console | Cloud Vehicle Service</title>
+  <!-- Google Fonts & Font Awesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-cloud"></i>
+        </div>
+        <span>Cloud<span class="highlight">Service</span> <span class="badge badge-admin" style="font-size: 0.7rem; vertical-align: middle;">Admin</span></span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu"></ul>
+      <div class="nav-actions" id="nav-actions"></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+      <div>
+        <h1 style="font-size: 2.2rem;">Workshop Operations Console</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Oversee appointments, update technician workflow states, and manage vehicle service packages.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button id="btn-tab-bookings" onclick="switchAdminTab('bookings')" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-list-check"></i> Bookings Console
+        </button>
+        <button id="btn-tab-services" onclick="switchAdminTab('services')" class="btn btn-secondary btn-sm">
+          <i class="fa-solid fa-wrench"></i> Service Packages
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Top Statistics KPI Counters -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-admin-total">0</div>
+          <div class="stat-label">Total Appointments</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon amber">
+          <i class="fa-solid fa-hourglass-start"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-admin-pending">0</div>
+          <div class="stat-label">Pending Approval</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <i class="fa-solid fa-wrench"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-admin-inprogress">0</div>
+          <div class="stat-label">In Workshop Service</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-admin-completed">0</div>
+          <div class="stat-label">Completed Jobs</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <i class="fa-solid fa-indian-rupee-sign"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-admin-revenue" style="font-size: 1.6rem;">₹0</div>
+          <div class="stat-label">Gross Revenue</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div>
+          <div class="stat-value" id="stat-admin-users" style="font-size: 1.15rem;">0 Users</div>
+          <div class="stat-label">Registered Fleet</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1: Bookings Management -->
+    <div id="tab-bookings-section">
+      <div class="card">
+        <div class="card-header" style="flex-wrap: wrap; gap: 1rem;">
+          <div class="card-title">
+            <i class="fa-solid fa-clipboard-list text-blue"></i> Customer Bookings Queue
+            <span class="badge badge-pending" id="booking-count-badge" style="margin-left: 0.5rem; font-size: 0.75rem;">Loading...</span>
+          </div>
+
+          <!-- Filter & Search Controls -->
+          <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+            <div style="position: relative;">
+              <input type="text" id="admin-search-input" class="form-control" placeholder="Search customer, plate, or service..." style="padding-left: 2.2rem; width: 280px; font-size: 0.88rem; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+              <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+            </div>
+
+            <select id="admin-status-filter" class="form-control" style="width: 170px; font-size: 0.88rem; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+              <option value="All">All Statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bookings Table -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Booking Ref</th>
+                <th>Customer Info</th>
+                <th>Vehicle</th>
+                <th>Service Package</th>
+                <th>Appointment Date</th>
+                <th>Fee & Payment</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-bookings-tbody">
+              <tr>
+                <td colspan="8" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+                  <i class="fa-solid fa-circle-notch fa-spin fa-2x"></i>
+                  <p style="margin-top: 0.5rem;">Loading workshop orders...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Manage Service Packages -->
+    <div id="tab-services-section" style="display: none;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-wrench text-blue"></i> Workshop Service Catalog
+          </div>
+          <button onclick="openModal('modal-add-service')" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-plus"></i> Add New Service Package
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Service Package</th>
+                <th>Category</th>
+                <th>Est. Time</th>
+                <th>Base Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-services-tbody">
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 2rem;">Loading service packages...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Update Booking Status -->
+  <div class="modal-overlay" id="modal-update-status">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-pen-to-square text-blue"></i> Update Workshop Booking Status
+        </h3>
+        <button class="modal-close" onclick="closeModal('modal-update-status')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div style="background: var(--surface-alt); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 1.25rem;">
+        <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Appointment Target:</span>
+        <div id="modal-booking-ref" style="font-weight: 700; color: #fff; margin-top: 0.2rem;">#REF</div>
+      </div>
+
+      <form id="form-update-status">
+        <div class="form-group">
+          <label class="form-label" for="edit-status">Booking Status *</label>
+          <select id="edit-status" class="form-control" required>
+            <option value="Pending">Pending (Awaiting Confirmation)</option>
+            <option value="Confirmed">Confirmed (Bay Reserved)</option>
+            <option value="In Progress">In Progress (Under Active Service)</option>
+            <option value="Completed">Completed (Ready for Delivery / Inspection Passed)</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="edit-payment-status">Payment Status *</label>
+          <select id="edit-payment-status" class="form-control" required>
+            <option value="Pending">Pending</option>
+            <option value="Paid">Paid</option>
+            <option value="Refunded">Refunded</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="edit-admin-notes">Technician & Workshop Notes</label>
+          <textarea id="edit-admin-notes" class="form-control" rows="3" placeholder="e.g. Engine oil replaced with Castrol 5W-30, brake pads checked, tire pressure set to 33 PSI"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modal-update-status')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-save-status">
+            <i class="fa-solid fa-check"></i> Save Status Updates
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add New Service Package -->
+  <div class="modal-overlay" id="modal-add-service">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-plus text-blue"></i> Create Service Package
+        </h3>
+        <button class="modal-close" onclick="closeModal('modal-add-service')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="form-add-service">
+        <div class="form-group">
+          <label class="form-label" for="pkg-name">Package Name *</label>
+          <input type="text" id="pkg-name" class="form-control" placeholder="e.g. Full Synthetic Transmission Flush" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="pkg-desc">Detailed Description *</label>
+          <textarea id="pkg-desc" class="form-control" rows="2" placeholder="List components checked and fluids replaced" required></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="pkg-cat">Category *</label>
+            <select id="pkg-cat" class="form-control" required>
+              <option value="Periodic Maintenance">Periodic Maintenance</option>
+              <option value="Brakes & Suspension">Brakes & Suspension</option>
+              <option value="Engine & Transmission">Engine & Transmission</option>
+              <option value="AC & Electrical">AC & Electrical</option>
+              <option value="Detailing & Wash">Detailing & Wash</option>
+              <option value="Inspection & Diagnostics">Inspection & Diagnostics</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="pkg-price">Base Price (₹) *</label>
+            <input type="number" id="pkg-price" class="form-control" placeholder="2999" required min="0">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="pkg-time">Estimated Time</label>
+            <input type="text" id="pkg-time" class="form-control" placeholder="2 - 3 Hours" value="2 - 3 Hours">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="pkg-icon">FontAwesome Icon Class</label>
+            <input type="text" id="pkg-icon" class="form-control" placeholder="fa-gear" value="fa-gear">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('modal-add-service')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-save-service">
+            <i class="fa-solid fa-check"></i> Create Package
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>&copy; 2026 Cloud Vehicle Service Booking System - Admin Operations</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="admin-dashboard.html">Admin Console</a></li>
+        <li><a href="customer-dashboard.html">Customer View</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>
